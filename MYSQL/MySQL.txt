@@ -1,0 +1,101 @@
+use shushank;
+Database changed
+
+mysql> create table countries(country_id int not null,country_name varchar(20),region_id int);
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> alter table countries add phnno int not null;
+Query OK, 0 rows affected (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table countries modify region_id varchar(10);
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into countries values(1001,'India','IN');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+
+mysql> select * from countries;
+Empty set (0.00 sec)
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | NO   |     | NULL    |       |
+| country_name | varchar(20) | YES  |     | NULL    |       |
+| region_id    | varchar(10) | YES  |     | NULL    |       |
+| phnno        | int         | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.12 sec)
+mysql> alter table countries drop column phnno;
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | NO   |     | NULL    |       |
+| country_name | varchar(20) | YES  |     | NULL    |       |
+| region_id    | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> insert into countries values(101,'India','IN');
+Query OK, 1 row affected (0.22 sec)
+
+mysql> insert into countries values(102,'United States','US');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into countries values(103,'Ukraine','UA');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into countries values(104,'QUATAR','QA');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into countries values(105,'JAPAN','JP');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from countries;
++------------+---------------+-----------+
+| country_id | country_name  | region_id |
++------------+---------------+-----------+
+|        101 | India         | IN        |
+|        102 | United States | US        |
+|        103 | Ukraine       | UA        |
+|        104 | QUATAR        | QA        |
+|        105 | JAPAN         | JP        |
++------------+---------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_shushank |
++--------------------+
+| countries          |
+| hospital           |
+| hospital_1         |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> update countries set region_id='pk' where country_id=102;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from countries;
++------------+---------------+-----------+
+| country_id | country_name  | region_id |
++------------+---------------+-----------+
+|        101 | India         | IN        |
+|        102 | United States | pk        |
+|        103 | Ukraine       | UA        |
+|        104 | QUATAR        | QA        |
+|        105 | JAPAN         | JP        |
++------------+---------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> alter table countries add President_Name varchar(60);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
